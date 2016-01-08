@@ -2,7 +2,7 @@ package com.blog.example.domain;
 
 public class Book {
 
-    private String title;
+    private final String title;
     private final String author;
     private final int publicationYear;
 
