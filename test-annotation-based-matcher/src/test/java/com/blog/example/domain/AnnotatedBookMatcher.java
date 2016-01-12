@@ -51,12 +51,15 @@ public final class AnnotatedBookMatcher extends AnnotationBasedMatcher<Book> {
     }
 
     public AnnotatedBookMatcher whichHasOpinions( String... expectedOpinions ) {
+        opinionsMatcher = describedAs( "[" + descriptionFormat( expectedOpinions ) + "] in any order", containsInAnyOrder( expectedOpinions ), expectedOpinions );
+        return this;
+    }
+
+    private String descriptionFormat( String[] descriptionParts ) {
         List<String> elementIndicators = new ArrayList<>();
-        for ( int i = 0; i < expectedOpinions.length; i++ ) {
+        for ( int i = 0; i < descriptionParts.length; i++ ) {
             elementIndicators.add( "%" + i );
         }
-        String descriptionFormat = join( ", ", elementIndicators );
-        opinionsMatcher = describedAs( "[" + descriptionFormat + "] in any order", containsInAnyOrder( expectedOpinions ), expectedOpinions );
-        return this;
+        return join( ", ", elementIndicators );
     }
 }
